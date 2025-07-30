@@ -2,21 +2,24 @@
 name = "webjam-matching-service"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Matthew Franco",email = "matthew.m.franco@gmail.com"}
-]
+authors = [{ name = "Matthew Franco", email = "matthew.m.franco@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi (>=0.116.1,<0.117.0)",
     "uvicorn (>=0.35.0,<0.36.0)",
     "scikit-learn (>=1.7.1,<2.0.0)",
-    "numpy (>=2.3.2,<3.0.0)"
+    "numpy (>=2.3.2,<3.0.0)",
 ]
 
 [tool.poetry]
-packages = [{include = "webjam_matching_service", from = "src"}]
+packages = [{ include = "webjam_matching_service", from = "src" }]
 
+[tool.poe.tasks]
+dev = "uvicorn src.webjam_matching_service.main:app --reload --host 0.0.0.0 --port 8000"
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.36.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
