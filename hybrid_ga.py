@@ -222,12 +222,11 @@ def local_search_heuristic(individual, fitness_fn, users_data, jam_data, weights
 # --- API Endpoint and Main Function ---
 
 @app.post('/api/match', response_model=MatchResponse)
-async def match_teams(request_body: MatchRequest):
-    try:
-        users_data = request_body.users
-        jam_data = request_body.jam
-        weights = request_body.weights
+async def match_teams_endpoint(request: MatchRequest):
+  return match_teams(users_data=request.users, jam_data=request.jam, weights=request.weights)
 
+async def match_teams(users_data, jam_data, weights):
+    try:
         # Create a list of user IDs
         user_ids = [u.id for u in users_data]
         team_size = jam_data.team_size
